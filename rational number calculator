@@ -1,0 +1,98 @@
+
+/* THE ALGORITHM
+ 1-  Include necessary libraries:
+  Include the necessary libraries such as iostream and string.
+
+ 1-  Declare variables:
+ Declare variables to store input terms (term1, term2, term3, term4), operations (operation1, operation2, operation3), and a choice variable for continuing calculations.
+
+ 2-  Print welcome message:
+  Display a welcome message indicating that the user has entered the rational number calculator.
+
+ 3-  Main Loop:
+ Enter into a loop that continues until the user decides to exit.
+
+ 4-  Prompt for operation:
+ Prompt the user to enter an operation.
+
+ 5-  Input handling:
+ Read the input operation and terms from the user. Check for input errors, invalid operations, and division by zero. If any error is encountered, display an appropriate error message and continue to the next iteration of the loop.
+
+ 6-  Perform calculation:
+ Perform the requested arithmetic operation on the rational numbers. Display the result along with an approximate rounded value.
+
+ 7-  Prompt for continuation:
+ Ask the user if they want to perform another calculation. If the user chooses not to continue, exit the loop.
+
+ 8-  Exit the program:
+ Return 0 to indicate successful execution and exit.*/
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    cout << "welcome to rational number calculator" << endl;
+    double term1, term2, term3, term4; // Variables to store the input terms
+    char operation1, operation2, operation3; // Variables to store the operations
+
+    // Main loop for calculator operation
+    while (true) {
+        cout << "enter your operation : ";
+
+        // Input for the operation, with error handling
+        if (!(cin >> term1 >> operation1 >> term2 >> operation3 >> term3 >> operation2 >> term4)) {
+            // Input failed, clear the error state and ignore the rest of the line
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please try again." << endl;
+            continue;
+        }
+
+        // Check for division by zero
+        if (term2 == 0 || term4 == 0) {
+            cout << "please enter valid non-zero denominators" << endl;
+            continue;
+        }
+
+        // Check for valid rational number format
+        if (operation1 != '/' || operation2 != '/') {
+            cout << "please enter a rational number (e.g., 1/2)" << endl;
+            continue;
+        }
+
+        // Check for valid operation
+        if (operation3 != '+' && operation3 != '-' && operation3 != '*' && operation3 != '/') {
+            cout << "please enter a valid operation (+, -, *, /)" << endl;
+            continue;
+        }
+
+        // Perform the calculation based on the operation
+        switch (operation3) {
+            case '+':
+                cout << term1 << '/' << term2 << " " << operation3 << " " << term3 << '/' << term4 << " " << '='
+                     << " " << (term1 * term4) + (term3 * term2) << '/' << (term2 * term4) << " = "<<(term1/term2)+(term3/term4)<<" ≈ "<<round((term1/term2)+(term3/term4))<< endl;
+                break;
+            case '/':
+                cout << term1 << '/' << term2 << " " << operation3 << " " << term3 << '/' << term4 << " " << '='
+                     << " " << (term1 * term4) << '/' << (term2 * term3) <<" = "<<(term1/term2)/(term3/term4)<<" ≈ "<<round((term1/term2)/(term3/term4))<< endl;
+                break;
+            case '-':
+                cout << term1 << '/' << term2 << " " << operation3 << " " << term3 << '/' << term4 << " " << '='
+                     << " " << (term3 * term2) - (term1 * term4) << '/' << (term2 * term4) <<" = "<<(term1/term2)-(term3/term4)<<" ≈ "<<round((term1/term2)-(term3/term4))<< endl;
+                break;
+            case '*':
+                cout << term1 << '/' << term2 << " " << operation3 << " " << term3 << '/' << term4 << " " << '='
+                     << " " << (term1 * term3) << '/' << (term2 * term4) << " = "<<(term1/term2)*(term3/term4)<<" ≈ "<<round((term1/term2)*(term3/term4))<<endl;
+                break;
+        }
+
+        // Prompt the user if they want to perform another calculation
+        char choice;
+        cout << "Do you want to perform another calculation? (y/n): ";
+        cin >> choice;
+        if (choice != 'y' && choice != 'Y') {
+            break;
+        }
+    }
+    return 0;
+}
